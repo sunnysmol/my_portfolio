@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+streamlit = "*"
+web3 = "*"
+gql = {version = "==3.0.0b0", extras = ["all"]}
+aiohttp = "*"
+streamlit-autorefresh = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
