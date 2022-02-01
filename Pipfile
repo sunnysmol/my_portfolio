@@ -9,6 +9,7 @@ web3 = "*"
 gql = {version = "==3.0.0b0", extras = ["all"]}
 aiohttp = "*"
 streamlit-autorefresh = "*"
+pymongo = "*"
 
 [dev-packages]
 
