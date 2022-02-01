@@ -10,6 +10,7 @@ from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 from streamlit_autorefresh import st_autorefresh
 from web3 import Web3
+import pymongo
 
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -26,6 +27,28 @@ addresses = ["0xC844bB1D41C052d73f002080F19C17C9E5545291","0x76844D2Fc304c9a4260
 #          addresses.append(add)
 # else:
 #      st.write('Enter Address')
+def moralis():
+    mongo_host = '139.59.119.84'
+    mongo_port = 56728
+    con = pymongo.MongoClient(mongo_host,mongo_port)
+    bsc_trans = con['parse']['BscTransactions']
+    my_portfolio = con['parse']['portfolio']
+
+    my_portfolio.insert_one("file_data")
+    temp_data = bsc_trans.find()
+    pprint(temp_data)
+    temp_df = pd.DataFrame(temp_data)
+    temp_df
+def moralis_portfolio_write(value):
+    mongo_host = '139.59.119.84'
+    mongo_port = 56728
+    con = pymongo.MongoClient(mongo_host,mongo_port)
+    db = con['parse']['Chintu']
+    portfolio_value = db['values']
+    print(value)
+    to_save = portfolio_value.insert_one(value)
+    print(to_save.acknowledged)
+    print(to_save.inserted_id)
 def getTokenPrice():
     arb = "https://speedy-nodes-nyc.moralis.io/80e8714f0b9b5a203c20b5e8/arbitrum/mainnet"
     web3 = Web3(Web3.HTTPProvider(arb))
@@ -203,8 +226,10 @@ magic_price = magic_usd
 sol_usd = sol_floor*magic_usd
 total_smols_value = round(float((smol_brains_floor*magic_price)+(smol_boadies_floor*magic_price)),2)
 kpi3.metric(label="Smolverse Value USD", value=f"${total_smols_value}")
-kpi4.metric(label="Seed OF Life Floor MAGIC", value=f"{sol_floor}")
-totoal_portfolio.title(f"Portfolio:   ${round((allAddressValue(addresses))+ new_df['Total Value'].sum() * eth_usd,2)+total_smols_value+sol_usd}")
+#kpi4.metric(label="Seed OF Life Floor MAGIC", value=f"{sol_floor}")
+totoal_portfolio.title(f"Portfolio:   ${round((allAddressValue(addresses))+ new_df['Total Value'].sum() * eth_usd,2)+total_smols_value}")
+#data_to_save = {'value': round((allAddressValue(addresses))+ new_df['Total Value'].sum() * eth_usd,2)+total_smols_value+sol_usd,'date':}
+
 
 #nft_data = getNFTFloor("Monsterbuds")
 #pprint(nft_data)
@@ -230,6 +255,6 @@ totoal_portfolio.title(f"Portfolio:   ${round((allAddressValue(addresses))+ new_
 
 
 st.title("Wallets")
-showWallets(addresses)
-
+#showWallets(addresses)
+#moralis()
 
