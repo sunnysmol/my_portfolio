@@ -224,7 +224,7 @@ sol_floor = getSmolFloorPrice("Seed of Life")
 
 magic_price = magic_usd
 sol_usd = sol_floor*magic_usd
-total_smols_value = round(float((smol_brains_floor*magic_price)+(smol_boadies_floor*magic_price)),2)
+total_smols_value = round(float(((smol_brains_floor*magic_price)*2)+(smol_boadies_floor*magic_price)),2)
 kpi3.metric(label="Smolverse Value USD", value=f"${total_smols_value}")
 #kpi4.metric(label="Seed OF Life Floor MAGIC", value=f"{sol_floor}")
 totoal_portfolio.title(f"Portfolio:   ${round((allAddressValue(addresses))+ new_df['Total Value'].sum() * eth_usd,2)+total_smols_value}")
