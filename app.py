@@ -267,7 +267,7 @@ space_game_spidox_value = round(float(getNFTFloor("sgspidoxdroid")*eth_usd))
 
 magic_price = magic_usd
 sol_usd = sol_floor*magic_usd
-total_legions = round(float(aux_legions*magic_price))*5
+total_legions = round(float(aux_legions*magic_price))*4
 smol_land_value = round(float(smol_land*magic_price))
 space_game_value = round(float(space_game_floor*eth_usd))*7
 
